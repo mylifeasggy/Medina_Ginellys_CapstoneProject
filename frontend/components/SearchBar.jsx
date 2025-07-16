@@ -40,8 +40,6 @@ const SearchBar = () => {
 
             const data = await response.json();
             setRecipe(data.recipe);
-            // After generating the list, let's clear the array
-            setIngredients([])
         } catch (e) {
 
             console.log(e)
