@@ -1,12 +1,21 @@
 import avatar from "../public/images/avatar.png"
+import NavBar from "./NavBar";
+
 
 
 const Header = () => {
     return (
-        <header>
-            <img className= "avatar" src= {avatar}/>
-                        <h1> I'M THE CHEF </h1>
-        </header>
+        <div className="header-container">
+            <header className="main-header">
+                <img className="avatar" src={avatar} />
+                <h1> I'M THE CHEF </h1>
+            </header>
+            <NavBar />
+        </div>
+
+
+
+
     );
 }
 

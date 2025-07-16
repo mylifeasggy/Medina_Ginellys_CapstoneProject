@@ -2,7 +2,7 @@ import React from 'react';
 
 const NavBar = () => {
     return (
-        <nav className='Main-nav'>
+        <nav className='main-nav'>
                 <a> Home </a>
                 <a> Recipes </a>
                 <a> Tips </a>
