@@ -40,6 +40,7 @@ const SearchBar = () => {
 
             const data = await response.json();
             setRecipe(data.recipe);
+            console.log(data.recipe)
         } catch (e) {
 
             console.log(e)
