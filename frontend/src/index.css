@@ -48,3 +48,37 @@ body {
     text-decoration: none;
     color: black;
 }
+
+/* SEARCH BAR */
+
+.main-container {
+    padding: 10px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 200px;
+
+}
+.search-ingredient {
+    margin-top: 100px;
+    gap: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
+
+#search-bar{
+     border-radius: 6px;
+    border: 1px solid #D1D5DB;
+    padding: 9px 13px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.add{
+     border-radius: 6px;
+    border: none;
+    padding: 9px 13px;
+    background-color: #f48c06;
+    font-weight: bold;
+}
