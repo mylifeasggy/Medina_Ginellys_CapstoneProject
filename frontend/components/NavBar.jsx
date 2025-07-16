@@ -1,14 +1,13 @@
-import React from 'react';
 
 const NavBar = () => {
     return (
-        <nav className='main-nav'>
-                <a> Home </a>
-                <a> Recipes </a>
-                <a> Tips </a>
-                <a> Form </a>
+        <div className='main-nav'>
+                <a className='a'> Home </a>
+                <a className='a'> Recipes </a>
+                <a className='a'> Tips </a>
+                <a className='a'> Form </a>
         
-        </nav>
+        </div>
     );
 }
 

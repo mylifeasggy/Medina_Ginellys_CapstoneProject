@@ -1,4 +1,4 @@
-import avatar from "../public/images/avatar.png"
+import avatar from "/images/avatar.png"
 import NavBar from "./NavBar";
 
 
