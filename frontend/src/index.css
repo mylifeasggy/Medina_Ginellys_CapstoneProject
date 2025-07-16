@@ -82,3 +82,23 @@ body {
     background-color: #f48c06;
     font-weight: bold;
 }
+
+
+/* RECIPE */
+
+.recipe-container{
+
+  background: #fff9f5;
+  border: 2px solid #ffd6c1;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 2rem auto;
+  max-width: 700px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+
+}
+
+/* .recipe-content{
+
+
+} */
