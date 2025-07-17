@@ -1,17 +1,18 @@
-import React from 'react';
-
-const RecipeItem = () => {
 
 
+const RecipeItem = ({ data }) => {
+    console.log(data)
 
-
+    const recipeItem = data.map(item => {
+        <div>
+            <img src={item.strMealThumb} />
+            <h3> {item.strMeal}</h3>
+        </div>
+    })
 
     return (
         <>
-            <div className='item-container'>
-                <img src=''/>
 
-            </div>
         </>
     );
 }
