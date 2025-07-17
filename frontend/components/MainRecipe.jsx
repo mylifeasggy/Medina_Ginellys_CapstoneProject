@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import IngredientsList from "./IngredientsList";
-import Recipe from "./Recipe"
+import RecipeContainer from "./RecipeContainer"
 
 const SearchBar = () => {
 
@@ -71,7 +71,7 @@ const SearchBar = () => {
                 getRecipe={getRecipe}
 
             />
-            {recipe && <Recipe recipe={recipe} />}
+            {recipe && <RecipeContainer recipe={recipe} />}
         </div>
     );
 }
