@@ -5,7 +5,7 @@ import Recipes from "../pages/Recipes"
 import { Route, Routes } from "react-router-dom"
 
 
-function App() {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               <NavBar />
+function App() {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
   return (
     <>
       <Header />
