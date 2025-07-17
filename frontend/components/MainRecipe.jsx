@@ -1,6 +1,7 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef} from "react";
 import IngredientsList from "./IngredientsList";
 import RecipeContainer from "./RecipeContainer"
+import { getRecipeFromAPI } from "../api/recipeAPI";
 
 const SearchBar = () => {
 
@@ -13,7 +14,7 @@ const SearchBar = () => {
     // Each ingredient the user put without spaces.
     function enterIngredient() {
 
-        const newIngredient = inputRef.current.value.trim();
+        const newIngredient = inputRef.current.value.trim().toLowerCase();
         if (!newIngredient) return;
 
         setIngredients((prev) => [...prev, newIngredient])
@@ -28,24 +29,15 @@ const SearchBar = () => {
 
     }
 
-    //Connection to the back end to send the ingredients an receive the recipes.
-    async function getRecipe() {
+     async function getRecipe() {
+    
+    try {
+        const recipeMarkdown = await getRecipeFromAPI(ingredient)
+        setRecipe(recipeMarkdown)
+    }catch(e) {
 
-        try {
-            const response = await fetch('http://localhost:3000/', {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ ingredients: ingredient }),
-            })
-
-            const data = await response.json();
-            setRecipe(data.recipe);
-            console.log(data.recipe)
-        } catch (e) {
-
-            console.log(e)
-
-        }
+        console.log(e)
+    }
     }
 
 
