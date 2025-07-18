@@ -5,7 +5,7 @@ const url = import.meta.env.VITE_BASE_URL
 const initialForm = {
     title: "",
     author:"",
-    ingredients: [],
+    ingredients:"",
     cook_time:0,
     servings:0,
     directions:"",
@@ -22,10 +22,37 @@ function handleChange(e) {
 }
 
 
-async function HandleSubmit(e) {
+async function handleSubmit(e) {
     e.preventDefault()
+
+    const recipe = {
+        title: form.title,
+        author: form.author,
+        ingredients: [],
+        cook_time: form.cook_time,
+        servings: form.servings,
+        directions: form.directions,
+        notes: form.notes,
+
+    }
+
+        const response = await fetch(url+'/form',{
+            method:'POST',
+            body:JSON.stringify(recipe),
+            headers:{
+                'Content-Type': 'application/json'
+            }
+
+    })
+
+    const newForm = await response.json()
+    console.log(newForm)
+    setForm(initialForm);
     
 }
+
+    
+
 
 
 
