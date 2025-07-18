@@ -6,7 +6,7 @@ const initialForm = {
     title: "",
     author:"",
     ingredients:"",
-    cook_time:0,
+    cook_time:"",
     servings:0,
     directions:"",
     notes:"",
@@ -28,7 +28,7 @@ async function handleSubmit(e) {
     const recipe = {
         title: form.title,
         author: form.author,
-        ingredients: form.ingredients,
+        ingredients: form.ingredients.split(","),
         cook_time: form.cook_time,
         servings: form.servings,
         directions: form.directions,
@@ -60,7 +60,7 @@ async function handleSubmit(e) {
         <div className='create-recipe'>
             <h2> CREATE YOUR RECIPE</h2>
             <form onSubmit={handleSubmit}>
-                <label>RECIPE NAME</label>
+                <label>RECIPE TITLE</label>
                 <input
                     type="text"
                     name='title'
@@ -81,6 +81,7 @@ async function handleSubmit(e) {
                     type="text"
                     name="ingredients"
                     value={form.ingredients}
+                    placeholder="separated by comma"
                     onChange={handleChange}
                     required            
                     />

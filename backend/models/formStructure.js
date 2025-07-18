@@ -32,6 +32,6 @@ const formModel = mongoose.Schema({
 
 });
 
-formModel.index({cook_time: 1 });
+formModel.index({servings: 1 });
 
 export default mongoose.model('recipes', formModel);
