@@ -15,7 +15,7 @@ const formModel = mongoose.Schema({
         required:true
     },
     cook_time: {
-        type:Number,
+        type:String,
         required:true
     },
     servings: {
