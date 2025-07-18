@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const formModel = mongoose.Schema({
-    recipe_name: {
+    title: {
         type: String,
         required:true,
     },

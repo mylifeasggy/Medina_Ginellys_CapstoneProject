@@ -18,7 +18,7 @@ const Form = () => {
     
 
 function handleChange(e) {
-    setForm({...form, [e.target.name]:e.target.value})
+    setForm({...form, [e.target.name]: e.target.value})
 }
 
 
@@ -28,7 +28,7 @@ async function handleSubmit(e) {
     const recipe = {
         title: form.title,
         author: form.author,
-        ingredients: [],
+        ingredients: form.ingredients,
         cook_time: form.cook_time,
         servings: form.servings,
         directions: form.directions,
@@ -80,6 +80,7 @@ async function handleSubmit(e) {
                 <input
                     type="text"
                     name="ingredients"
+                    value={form.ingredients}
                     onChange={handleChange}
                     required            
                     />
