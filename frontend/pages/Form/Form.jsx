@@ -1,70 +1,89 @@
-import React from 'react';
-
-
+import { useState } from "react"
 
 const url = import.meta.env.VITE_BASE_URL
 
-
+const initialForm = {
+    title: "",
+    author:"",
+    ingredients: [],
+    cook_time:0,
+    servings:0,
+    directions:"",
+    notes:"",
+    
+}
 const Form = () => {
 
-  
+    const [form, setForm] = useState(initialForm)
+    
 
-    /*async function getForm() {
-        const response = await fetch(`${url}/form`)
-        const data =
-        
-        
-    }
-*/
-
-    async function handleSubmite(e) {
-
-    }
+function handleChange(e) {
+    setForm({...form, [e.target.name]:e.target.value})
+}
 
 
+async function HandleSubmit(e) {
+    e.preventDefault()
+    
+}
 
 
 
     return (
         <div className='create-recipe'>
             <h2> CREATE YOUR RECIPE</h2>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <label>RECIPE NAME</label>
-                <input 
-                type="text" 
-                name='recipe_name' 
-                required 
+                <input
+                    type="text"
+                    name='title'
+                    required
+                    value={form.title}
+                    onChange={handleChange}
                 />
                 <label>AUTHOR</label>
-                <input 
-                type='text' 
-                name="author" 
-                required 
+                <input
+                    type='text'
+                    name="author"
+                    value={form.author}
+                    onChange={handleChange}
+                    required
                 />
                 <label>INGREDIENTS</label>
-                <input 
-                type="text" 
-                name="ingredients" 
-                required />
+                <input
+                    type="text"
+                    name="ingredients"
+                    onChange={handleChange}
+                    required            
+                    />
                 <label>COOK TIME</label>
-                <input 
-                type='number' 
-                name='cook_time' 
-                required 
+                <input
+                    type='number'
+                    name='cook_time'
+                    value={form.cook_time}
+                     onChange={handleChange}
+                    required
                 />
                 <label>SERVINGS</label>
-                <input 
-                type='number' 
-                name='servings' 
+                <input
+                    type='number'
+                    name='servings'
+                    value={form.servings}
+                    onChange={handleChange}
                 />
                 <label>INSTRUCTIONS</label>
-                <textarea 
-                name='directions'> 
+                <textarea
+                    name='directions'
+                    value={form.directions}
+                    onChange={handleChange}
+                    >
                 </textarea>
                 <label>NOTES</label>
-                <input 
-                type='text' 
-                name="notes" 
+                <input
+                    type='text'
+                    name="notes"
+                    value={form.notes}
+                    onChange={handleChange}
                 />
                 <button>Submit Recipe</button>
             </form>
