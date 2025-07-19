@@ -17,7 +17,6 @@ const initialForm = {
 const Form = () => {
 
     const [form, setForm] = useState(initialForm)
-    const [recipes, setRecipes]= useState([])
 
 
     function handleChange(e) {
@@ -54,24 +53,28 @@ const Form = () => {
 
         }
 
-        const response = await fetch(url + '/form', {
-            method: 'POST',
-            body: JSON.stringify(recipe),
-            headers: {
-                'Content-Type': 'application/json'
-            }
+        try {
+            const response = await fetch(url + '/form', {
+                method: 'POST',
+                body: JSON.stringify(recipe),
+                headers: {
+                    'Content-Type': 'application/json'
+                },
 
-        })
+            })
 
-        const newForm = await response.json()
-        console.log(newForm)
-        setForm(initialForm);
+            const newForm = await response.json()
+            console.log(newForm)
+            setForm(initialForm);
 
+        } catch (e) {
+            console.log(e)
+        }
     }
-
 
     async function handleDelete(id) {
 
+        console.log("handleDelete called with:", id);
         await fetch(`${url}/form/${id}`, {
             method: 'DELETE'
         });
@@ -80,106 +83,83 @@ const Form = () => {
 
     }
 
-    async function handleEdit(id) {
-        try {
-            await fetch(`${url}/form/${id}`, {
-                method: 'DELETE'
-            });
-
-            getForm()
-
-        } catch (e) {
-            res.status(400).json({ error: e.message })
-        }
-
-    }
 
 
 
 
+    return (
+        <div className='create-recipe'>
+            <h2> CREATE YOUR RECIPE</h2>
+            <form onSubmit={handleSubmit}>
+                <label>RECIPE TITLE</label>
+                <input
+                    type="text"
+                    name='title'
+                    required
+                    value={form.title}
+                    onChange={handleChange}
+                />
+                <label>AUTHOR</label>
+                <input
+                    type='text'
+                    name="author"
+                    value={form.author}
+                    onChange={handleChange}
+                    required
+                />
+                <label>COOK TIME</label>
+                <input
+                    type='number'
+                    name='cook_time'
+                    value={form.cook_time}
+                    onChange={handleChange}
+                    required
+                />
+                <label>SERVINGS</label>
+                <input
+                    type='number'
+                    name='servings'
+                    value={form.servings}
+                    onChange={handleChange}
+                />
+                <label>INGREDIENTS</label>
+                <textarea
+                    type="text"
+                    name="ingredients"
+                    row='5'
+                    value={form.ingredients}
+                    placeholder="separated by comma"
+                    onChange={handleChange}
+                    required
+                >
+                </textarea>
+                <label>INSTRUCTIONS</label>
+                <textarea
+                    name='directions'
+                    row="5"
+                    value={form.directions}
+                    onChange={handleChange}
+                >
+                </textarea>
+                <label>NOTES</label>
+                <input
+                    type='text'
+                    name="notes"
+                    value={form.notes}
+                    onChange={handleChange}
+                />
+                <button>Submit Recipe</button>
+            </form>
 
+            <div className="form-item">
 
-return (
-    <div className='create-recipe'>
-        <h2> CREATE YOUR RECIPE</h2>
-        <form onSubmit={handleSubmit}>
-            <label>RECIPE TITLE</label>
-            <input
-                type="text"
-                name='title'
-                required
-                value={form.title}
-                onChange={handleChange}
-            />
-            <label>AUTHOR</label>
-            <input
-                type='text'
-                name="author"
-                value={form.author}
-                onChange={handleChange}
-                required
-            />
-            <label>COOK TIME</label>
-            <input
-                type='number'
-                name='cook_time'
-                value={form.cook_time}
-                onChange={handleChange}
-                required
-            />
-            <label>SERVINGS</label>
-            <input
-                type='number'
-                name='servings'
-                value={form.servings}
-                onChange={handleChange}
-            />
-            <label>INGREDIENTS</label>
-            <textarea
-                type="text"
-                name="ingredients"
-                row='5'
-                value={form.ingredients}
-                placeholder="separated by comma"
-                onChange={handleChange}
-                required
-            >
-            </textarea>
-            <label>INSTRUCTIONS</label>
-            <textarea
-                name='directions'
-                row="5"
-                value={form.directions}
-                onChange={handleChange}
-            >
-            </textarea>
-            <label>NOTES</label>
-            <input
-                type='text'
-                name="notes"
-                value={form.notes}
-                onChange={handleChange}
-            />
-            <button>Submit Recipe</button>
-        </form>
+                <FormItem
+                />
 
-        <div className="form-item">
-            {recipes.map((recipe)=>(
-            <FormItem
-            key={recipe._id}
-            data={recipe}
-            onDelete={handleDelete}
-            onEdit={()=> handleEdit(recipe)}
-            
-            />
-
-            ))}
-          
+            </div>
         </div>
-    </div>
-);
+    );
 }
-
 
 
 

@@ -10,16 +10,16 @@ const formModel = mongoose.Schema({
         type:String,
         required:true,
     },
-    ingredients: {
-        type:[String],
-        required:true
-    },
     cook_time: {
         type:String,
         required:true
     },
     servings: {
         type:Number
+    },
+     ingredients: {
+        type:[String],
+        required:true
     },
     directions: {
         type:String,

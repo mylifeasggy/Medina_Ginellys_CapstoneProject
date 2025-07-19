@@ -46,7 +46,7 @@ formRoute.post('/', async (req, res) => {
 
     } catch (e) {
 
-        res.status(400).json(e)
+       res.status(400).json({ error: e.message })
     }
 });
 
@@ -55,19 +55,27 @@ formRoute.put('/:id', async (req, res) => {
 
     const {id} =req.params;
     try {
-        const response = await Form.findByIdAndDelete(id)
-        console.log(response)
-        res.status(200).json(response)
+        const recipeForm = await Form.findByIdAndUpdate(id)
+        console.log(recipeForm)
+        res.status(200).json(recipeForm)
     } catch (e) {
         console.log(e)
-        res.status(400).json(e)
+        res.status(400).json({ error: e.message })
     }
 })
 
-formRoute.put('/:id', async (req, res)=> {
+formRoute.delete('/:id', async (req, res)=> {
+    try{
+        const { id } = req.params;
+        const recipeForm = await Form.findByIdAndDelete(id)
+        await recipeForm.save()
 
+    } catch (e) {
+        console.log(e)
+       res.status(400).json({ error: e.message })
+    }
 
 })
 
 
-export default formRoute
+export default formRoute;
