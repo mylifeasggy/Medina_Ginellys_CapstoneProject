@@ -46,33 +46,47 @@ formRoute.post('/', async (req, res) => {
 
     } catch (e) {
 
-       res.status(400).json({ error: e.message })
+        res.status(400).json({ error: e.message })
     }
 });
 
 
 formRoute.put('/:id', async (req, res) => {
 
-    const {id} =req.params;
+    const { id } = req.params;
     try {
-        const recipeForm = await Form.findByIdAndUpdate(id)
-        console.log(recipeForm)
-        res.status(200).json(recipeForm)
+        const updatedRecipe = await Form.findByIdAndUpdate(id, req.body, { new: true })
+        console.log(updatedRecipe)
+
+
+        if (!updatedRecipe) {
+            return res.status(404).json({ error: "Recipe not found" });
+        }
+        res.status(200).json(updatedRecipe)
+
+
     } catch (e) {
         console.log(e)
         res.status(400).json({ error: e.message })
     }
 })
 
-formRoute.delete('/:id', async (req, res)=> {
-    try{
+formRoute.delete('/:id', async (req, res) => {
+    try {
         const { id } = req.params;
-        const recipeForm = await Form.findByIdAndDelete(id)
-        await recipeForm.save()
+        const deletedRecipe = await Form.findByIdAndDelete(id)
+
+        if (!deletedRecipe) {
+            return res.status(404).json({ error: "Recipe not found" });
+
+
+        }
+        res.status(200).json({ message: "Recipe deleted successfully", recipeForm });
+
 
     } catch (e) {
         console.log(e)
-       res.status(400).json({ error: e.message })
+        res.status(400).json({ error: e.message })
     }
 
 })

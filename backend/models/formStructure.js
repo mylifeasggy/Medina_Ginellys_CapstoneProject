@@ -15,7 +15,8 @@ const formModel = mongoose.Schema({
         required:true
     },
     servings: {
-        type:Number
+        type:Number,
+        default:1
     },
      ingredients: {
         type:[String],
