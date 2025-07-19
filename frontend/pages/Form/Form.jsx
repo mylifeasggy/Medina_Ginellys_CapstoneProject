@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { useState } from "react"
-import FormDetails from "./FormDetails"
+import FormCard from "./FormCard"
 
 const url = import.meta.env.VITE_BASE_URL
 
@@ -157,7 +157,7 @@ const Form = () => {
                 {recipe && recipe.map((recipe)=> (
                     <div key={recipe._id} className="form-card">
 
-                     <FormDetails
+                     <FormCard
                     recipe={recipe}
                     onDelete={handleDelete} />
                 </div>
