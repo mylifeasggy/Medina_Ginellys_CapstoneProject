@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { useState } from "react"
-import FormItem from "./FormItem"
+import FormDetails from "./FormDetails"
 
 const url = import.meta.env.VITE_BASE_URL
 
@@ -17,13 +17,14 @@ const initialForm = {
 const Form = () => {
 
     const [form, setForm] = useState(initialForm)
+    const [recipe, setRecipes]= useState(null)
 
 
     function handleChange(e) {
         setForm({ ...form, [e.target.name]: e.target.value })
     }
 
-    async function getForm() {
+    async function fetchForm() {
 
         try {
             const response = await fetch(url + '/form')
@@ -36,7 +37,7 @@ const Form = () => {
     }
 
     useEffect(() => {
-        getForm()
+        fetchForm()
     }, [])
 
     async function handleSubmit(e) {
@@ -66,6 +67,7 @@ const Form = () => {
             const newForm = await response.json()
             console.log(newForm)
             setForm(initialForm);
+            fetchForm();
 
         } catch (e) {
             console.log(e)
@@ -79,7 +81,7 @@ const Form = () => {
             method: 'DELETE'
         });
 
-        getForm()
+        fetchForm()
 
     }
 
@@ -151,12 +153,18 @@ const Form = () => {
                 <button>Submit Recipe</button>
             </form>
 
-            <div className="form-item">
+            <div className="grid-form">
+                {recipe && recipe.map((recipe)=> (
+                    <div key={recipe._id} className="form-card">
 
-                <FormItem
-                />
+                     <FormDetails
+                    recipe={recipe}
+                    onDelete={handleDelete} />
+                </div>
 
+                ))}
             </div>
+
         </div>
     );
 }
