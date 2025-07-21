@@ -17,7 +17,7 @@ const initialForm = {
 const Form = () => {
 
     const [form, setForm] = useState(initialForm)
-    const [recipe, setRecipes]= useState(null)
+    const [recipe, setRecipes] = useState(null)
 
 
     function handleChange(e) {
@@ -74,19 +74,33 @@ const Form = () => {
         }
     }
 
-    async function handleDelete(id) {
 
-        console.log("handleDelete called with:", id);
-        await fetch(`${url}/form/${id}`, {
-            method: 'DELETE'
-        });
+    async function handleUpdate(id) {
+         e.preventDefault()
+    try{
+        const updateRecipe = {
+            title: form.title,
+            author: form.author,
+            cook_time: form.cook_time,
+            servings: form.servings,
+            ingredients: form.ingredients.split(","),
+            directions: form.directions,
+            notes: form.notes,
 
-        fetchForm()
+        }
+
+        response = await fetch(`${url}/form/${id}`, {
+                method: 'PUT',
+                body: JSON.stringify(updateRecipe),
+                headers: { 'Content-Type': 'application/json' },
+            });
+
+        }catch(e) {
+            console.log(e)
+        }
+
 
     }
-
-
-
 
 
     return (
@@ -154,13 +168,16 @@ const Form = () => {
             </form>
 
             <div className="grid-form">
-                {recipe && recipe.map((recipe)=> (
-                    <div key={recipe._id} className="form-card">
+                {recipe && recipe.map((recipe) => (
+                    <div key={recipe._id} className="form-container">
 
-                     <FormCard
-                    recipe={recipe}
-                    onDelete={handleDelete} />
-                </div>
+                        <FormCard
+                            recipe={recipe}
+                            onDelete={(id) => {
+                                setRecipes(prev => prev.filter(item => item._id !== id));
+                            }}
+                     />
+                    </div>
 
                 ))}
             </div>
