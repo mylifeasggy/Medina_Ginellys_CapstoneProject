@@ -81,7 +81,7 @@ formRoute.delete('/:id', async (req, res) => {
 
 
         }
-        res.status(200).json({ message: "Recipe deleted successfully", recipeForm });
+        res.status(200).json({ message: "Recipe deleted successfully", deletedRecipe });
 
 
     } catch (e) {
