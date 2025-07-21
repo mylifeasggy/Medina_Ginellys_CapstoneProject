@@ -18,6 +18,8 @@ const Form = () => {
 
     const [form, setForm] = useState(initialForm)
     const [recipe, setRecipes] = useState(null)
+    const [id, setId]= useState(null)
+    const [updateForm, setUpdateForm] = useState(false)
 
 
     function handleChange(e) {
@@ -32,7 +34,7 @@ const Form = () => {
             setRecipes(data)
 
         } catch (e) {
-            res.status(400).json({ error: e.message })
+            console.log(e)
         }
     }
 
@@ -55,18 +57,28 @@ const Form = () => {
         }
 
         try {
-            const response = await fetch(url + '/form', {
-                method: 'POST',
-                body: JSON.stringify(recipe),
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+            let response; 
 
-            })
+            if (updateForm && id) {
 
+                    response = await fetch(`${url}/form/${id}`, {
+                    method: 'PUT',
+                    body: JSON.stringify(recipe),
+                    headers: { 'Content-Type': 'application/json' },
+                });
+            } else {
+                    response = await fetch(url + '/form', {
+                    method: 'POST',
+                    body: JSON.stringify(recipe),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                })
+            }
             const newForm = await response.json()
             console.log(newForm)
             setForm(initialForm);
+            setUpdateForm(false)
             fetchForm();
 
         } catch (e) {
@@ -75,29 +87,25 @@ const Form = () => {
     }
 
 
-    async function handleUpdate(id) {
-         e.preventDefault()
-    try{
-        const updateRecipe = {
-            title: form.title,
-            author: form.author,
-            cook_time: form.cook_time,
-            servings: form.servings,
-            ingredients: form.ingredients.split(","),
-            directions: form.directions,
-            notes: form.notes,
+    async function handleUpdate(e, id) {
 
+        let response = await fetch(`${url}/form/${id}`)
+        let data = await response.json();
+
+        console.log(data)
+
+        const formData = {
+            title: data.title,
+            author: data.author,
+            cook_time: data.cook_time,
+            servings: data.servings,
+            ingredients: data.ingredients.join(","),
+            directions: data.directions,
+            notes: data.notes,
         }
-
-        response = await fetch(`${url}/form/${id}`, {
-                method: 'PUT',
-                body: JSON.stringify(updateRecipe),
-                headers: { 'Content-Type': 'application/json' },
-            });
-
-        }catch(e) {
-            console.log(e)
-        }
+        setId(id)
+        setUpdateForm(true)
+        setForm(formData)
 
 
     }
@@ -164,7 +172,8 @@ const Form = () => {
                     value={form.notes}
                     onChange={handleChange}
                 />
-                <button>Submit Recipe</button>
+                <button type="submit"> 
+                    {updateForm ? "Update Recipe" : "Submit Recipe"}</button>
             </form>
 
             <div className="grid-form">
@@ -176,7 +185,10 @@ const Form = () => {
                             onDelete={(id) => {
                                 setRecipes(prev => prev.filter(item => item._id !== id));
                             }}
-                     />
+
+                            handleUpdate={handleUpdate}
+                        />
+
                     </div>
 
                 ))}

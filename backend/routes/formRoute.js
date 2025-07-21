@@ -51,6 +51,19 @@ formRoute.post('/', async (req, res) => {
 });
 
 
+formRoute.get('/:id', async (req, res) => {
+
+    try {
+
+        const form = await Form.findById(req.params.id)
+        res.status(200).json(form)
+    } catch (e) {
+        console.log(e)
+        res.status(400).json({ error: e.message })
+    }
+
+});
+
 formRoute.put('/:id', async (req, res) => {
 
     const { id } = req.params;
