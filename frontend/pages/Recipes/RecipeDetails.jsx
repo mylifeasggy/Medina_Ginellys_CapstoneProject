@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom"
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 
 
 const RecipeDetails = () => {
+
+    const [details, setDetails]= useState(null)
 
     const { id } = useParams();
 
@@ -16,10 +18,8 @@ const RecipeDetails = () => {
             try {
                 const response = await fetch(url)
                 const data = await response.json();
-                console.log(data)
-
-
-
+                console.log(data.meals[0])
+                setDetails(data.meals[0])
             } catch (e) {
                 console.log(e)
 
@@ -30,40 +30,37 @@ const RecipeDetails = () => {
 
     }, [id])
 
-
-
-
     //For loop to get the list of ingredients. 
-    // const ingredients= []
+    const ingredients= []
 
-    // for(let i = 1; i <= 20; i++){
-    //     const ingredient = [`strIngredient${i}`]
-    //     console.log(ingredient)
-    //     const measure = [`strMeasure${i}`]
+    for(let i = 1; i <= 20; i++){
 
-    //     if(ingredient && ingredient.trim() !== ""){
-    //         ingredients.push({ingredient,measure})
-    //     }
-    // }
+        const ingredient = details[`strIngredient${i}`]
+        const measure = details[`strMeasure${i}`]
+
+        if(ingredient && ingredient.trim() !== ""){
+            ingredients.push({ingredient,measure})
+        }
+    }
 
 
     return (
         <>
 
             <div className="recipe-details">
-                {/* <h4>Ingredients:</h4> */}
-                {/* <ul> 
+                <h4>Ingredients:</h4>
+                <ul> 
             {ingredients.map((ing, i)=>(
                 <li key={i}>{ing.measure} {ing.ingredient}</li>
 
             ))}
-        </ul> */}
+        </ul> 
 
-                {/* <h4>Instructions:</h4>
-        <p>{recipe.strInstructions}</p> */}
+                <h4>Instructions:</h4>
+        <p>{details.strInstructions}</p>
             </div>
 
-            <Link to="/recipes"> </Link>
+            <Link to="/recipes"> <button className="go-backbtn"> Back to Recipes </button> </Link>
         </>
     )
 
