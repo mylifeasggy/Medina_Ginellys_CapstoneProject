@@ -7,6 +7,9 @@ import {Route, Routes } from "react-router-dom"
 import RecipeDetails from "../pages/Recipes/RecipeDetails"
 import FormDetails from "../pages/Form/FormDetails"
 
+import './css/Form.css'
+import './css/Recipes.css'
+
 
 
 function App() {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        

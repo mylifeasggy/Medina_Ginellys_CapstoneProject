@@ -1,6 +1,7 @@
 import { useState, useRef} from "react";
 import IngredientsList from "./IngredientsList";
 import RecipeContainer from "./RecipeContainer"
+import '../../src/css/MainPage.css'
 import { getRecipeFromAPI } from "../../api/recipeAPI";
 
 const SearchBar = () => {

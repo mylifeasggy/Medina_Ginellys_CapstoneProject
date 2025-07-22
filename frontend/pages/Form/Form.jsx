@@ -1,6 +1,7 @@
 import { useEffect } from "react"
 import { useState } from "react"
 import FormCard from "./FormCard"
+import '../../src/css/Form.css'
 
 const url = import.meta.env.VITE_BASE_URL
 

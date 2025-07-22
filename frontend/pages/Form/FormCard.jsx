@@ -9,7 +9,7 @@ const FormCard = ({ recipe, onDelete, handleUpdate}) => {
 
     async function handleDelete(id) {
 
-        console.log("handleDelete called with:", id);
+        console.log("deleterecipebyId", id);
         const response= await fetch(`${import.meta.env.VITE_BASE_URL}/form/${recipe._id}`, {
             method: 'DELETE'
         });
@@ -33,7 +33,7 @@ const FormCard = ({ recipe, onDelete, handleUpdate}) => {
                     <MdDeleteOutline />
                 </button>
                 <button className="item-btn" onClick={(e)=> handleUpdate(e, recipe._id)}> <CiEdit /> </button>
-                <Link to={`/form/${recipe._id}`}>
+                <Link className="link-container" to={`/form/${recipe._id}`}>
                     <button className="item-btn">View Details</button>
                 </Link>
             </div>

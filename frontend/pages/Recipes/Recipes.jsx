@@ -2,6 +2,7 @@
 import { useState, useRef, useEffect } from 'react';
 import RecipeItem from './RecipeItem';
 import { FaSearch } from "react-icons/fa";
+import '../../src/css/Recipes.css'
 
 
 
