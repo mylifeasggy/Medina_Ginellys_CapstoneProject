@@ -1,4 +1,4 @@
-import express from "express";
+import express, { json } from "express";
 import cors from "cors"
 import 'dotenv/config.js'
 import formRoute from "./routes/formRoute.js"
@@ -14,6 +14,7 @@ const port = process.env.PORT
 
 app.use(express.json());
 app.use(cors())
+
 
 /* Routes */
 app.use('/form', formRoute )
