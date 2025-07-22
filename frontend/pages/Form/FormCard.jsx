@@ -33,7 +33,7 @@ const FormCard = ({ recipe, onDelete, handleUpdate}) => {
                     <MdDeleteOutline />
                 </button>
                 <button className="item-btn" onClick={(e)=> handleUpdate(e, recipe._id)}> <CiEdit /> </button>
-                <Link to={`/recipes/${recipe._id}`}>
+                <Link to={`/form/${recipe._id}`}>
                     <button className="item-btn">View Details</button>
                 </Link>
             </div>
