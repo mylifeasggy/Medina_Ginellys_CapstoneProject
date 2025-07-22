@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 
 const RecipeDetails = () => {
 
-    const [details, setDetails]= useState(null)
+    const [details, setDetails] = useState(null)
 
     const { id } = useParams();
 
@@ -30,37 +30,51 @@ const RecipeDetails = () => {
 
     }, [id])
 
-    //For loop to get the list of ingredients. 
-    const ingredients= []
 
-    for(let i = 1; i <= 20; i++){
+
+    if (!details) {
+        return <p>Loading recipe...</p>;
+    }
+
+    //For loop to get the list of ingredients. 
+    const ingredients = []
+
+    for (let i = 1; i <= 20; i++) {
 
         const ingredient = details[`strIngredient${i}`]
         const measure = details[`strMeasure${i}`]
 
-        if(ingredient && ingredient.trim() !== ""){
-            ingredients.push({ingredient,measure})
+        if (ingredient && ingredient.trim() !== "") {
+            ingredients.push({ ingredient, measure })
         }
     }
+
 
 
     return (
         <>
 
             <div className="recipe-details">
-                <h4>Ingredients:</h4>
-                <ul> 
-            {ingredients.map((ing, i)=>(
-                <li key={i}>{ing.measure} {ing.ingredient}</li>
+                <h2 className="details-title">{details.strMeal}</h2>
+                <img className="details-image" src={details.strMealThumb} alt={details.strMeal} />
 
-            ))}
-        </ul> 
+                <h4 className="details-title" >Ingredients:</h4>
+                <ul className="details-list">
+                    {ingredients.map((ing, i) => (
+                        <li key={i}>{ing.measure} {ing.ingredient}</li>
 
-                <h4>Instructions:</h4>
-        <p>{details.strInstructions}</p>
+                    ))}
+                </ul>
+
+                <h4 className="details-title">Instructions:</h4>
+                <p className="instructions">{details.strInstructions}</p>
+
+                <div className="link">
+                    <Link to="/recipes" className="go-back" >Back</Link>
+                </div>
             </div>
 
-            <Link to="/recipes"> <button className="go-backbtn"> Back to Recipes </button> </Link>
+
         </>
     )
 

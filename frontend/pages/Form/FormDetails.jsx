@@ -4,15 +4,15 @@ import { useParams } from "react-router-dom";
 
 const FormDetails = () => {
 
-    const [formDetails, setFormDetails]= useState(null)
+    const [formDetails, setFormDetails] = useState(null)
     const { id } = useParams();
     const url = import.meta.env.VITE_BASE_URL
 
-     useEffect(() => {
+    useEffect(() => {
 
         async function DisplayForm() {
             try {
-                const response = await fetch (`${url}/form/${id}`)
+                const response = await fetch(`${url}/form/${id}`)
                 const data = await response.json();
                 console.log(data)
                 setFormDetails(data)
@@ -26,7 +26,7 @@ const FormDetails = () => {
 
     }, [id])
 
-        if (!formDetails) {
+    if (!formDetails) {
         return <p>Loading...</p>;
     }
 
@@ -34,17 +34,23 @@ const FormDetails = () => {
 
 
     return (
-        <div className="form-details">
-            <h2>{formDetails.title}</h2>
-            <p>CookTime: {formDetails.cook_time} minutes</p>
-            <p>Ingredients: {formDetails.ingredients.map((ingredient,i)=> (
-                <li key={i}>{ingredient}</li>
-            ))}</p>
-            <p>Instructions: {formDetails.directions}</p>
-          
-
-
-            <Link to="/form">Back</Link>
+        <div className="recipe-details">
+            <h2 className="details-title">{formDetails.title}</h2>
+            <p className="details-time">CookTime: {formDetails.cook_time} minutes</p>
+             <p className="details-time">Servings: {formDetails.servings} people</p>
+            <h4 className="details-title" >Ingredients:</h4>
+            <ul className="details-list ">
+                {formDetails
+                    .ingredients.map((ingredient, i) => (
+                        <li key={i}>{ingredient}</li>
+                    ))}
+                
+            </ul>
+            <h4 className="details-title">Instructions</h4>
+            <p className="instructions" >{formDetails.directions}</p>
+            <div className="link"> 
+            <Link to="/form" className="go-back" >Back</Link>
+            </div>
         </div>
     );
 }

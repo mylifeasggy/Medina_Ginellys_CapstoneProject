@@ -5,6 +5,7 @@ import NavBar from "./NavBar";
 
 const Header = () => {
     return (
+        <>
         <div className="header-container">
             <header className="main-header">
                 <img className="avatar" src={avatar} />
@@ -12,6 +13,11 @@ const Header = () => {
             </header>
             <NavBar />
         </div>
+
+
+        </>
+
+        
 
 
 

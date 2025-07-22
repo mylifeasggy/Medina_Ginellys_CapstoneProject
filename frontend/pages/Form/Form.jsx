@@ -166,12 +166,13 @@ const Form = () => {
                 >
                 </textarea>
                 <label>NOTES</label>
-                <input
+                <textarea
                     type='text'
                     name="notes"
                     value={form.notes}
                     onChange={handleChange}
-                />
+                >
+                </textarea>
                 <button type="submit"> 
                     {updateForm ? "Update Recipe" : "Submit Recipe"}</button>
             </form>

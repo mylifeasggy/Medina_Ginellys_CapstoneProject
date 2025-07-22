@@ -1,29 +1,36 @@
-import { TiDelete } from "react-icons/ti";
-
+import { MdDeleteOutline } from "react-icons/md";
 
 
 
 function IngredientsList({ ingredients, getRecipe, deleteIngredient }) {
 
-  const ing = ingredients.map((ing, index) => (
-    <li key={index}>
-      {ing}
-      <button className="delete-btn" onClick={() => deleteIngredient(index)}> <TiDelete />
-      </button>
-    </li>
-  ));
 
   return (
     <section>
+      <>
+      {ingredients.length > 0 && (
+        <div className="ing-container">
+          <ul className="ingredient-list">
+            {ingredients.map((ing, i) => (
+              <li key={i}>
+                {ing}
+                <div>
+                  <button className="delete-btn" onClick={() => deleteIngredient(i)}>
+                    <MdDeleteOutline />
+                  </button>
+                </div>  </li>))}
 
-      <ul className="ingredient-list"> {ing} </ul>
-      {ingredients.length >= 3 && <div className="get-recipe">
-        <div>
-          <h3> Generate a recipe from your list of ingredients</h3>
-        </div>
-        <button onClick={getRecipe}> Get a recipe </button>
+          </ul> </div>
+          )}
 
-      </div>}
+        {ingredients.length >= 3 && <div className="get-recipe">
+          <div>
+            <h3> Generate a recipe from your list of ingredients</h3>
+          </div>
+          <button onClick={getRecipe}> Get a recipe </button>
+
+        </div>}
+      </>
     </section>
   );
 }

@@ -5,6 +5,7 @@ import Recipes from "../pages/Recipes/Recipes"
 import Form from "../pages/Form/Form"
 import {Route, Routes } from "react-router-dom"
 import RecipeDetails from "../pages/Recipes/RecipeDetails"
+import FormDetails from "../pages/Form/FormDetails"
 
 
 
@@ -16,6 +17,7 @@ function App() {
       <Route path="/" element={<MainRecipe/>}/>
       <Route path="/recipes" element={<Recipes/>}/>
       <Route path="/recipes/:id" element={<RecipeDetails/>}/> 
+      <Route path="/form/:id" element={<FormDetails/>}/> 
       <Route path="/form" element={<Form/>}/>
       </Routes>
     </>
