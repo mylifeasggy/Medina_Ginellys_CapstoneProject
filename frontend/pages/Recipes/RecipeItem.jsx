@@ -1,6 +1,6 @@
 import { useState } from "react"
 import RecipeDetails from "./RecipeDetails"
-
+import { Link } from 'react-router-dom';
 
 const RecipeItem = ({ data }) => {
 
@@ -21,11 +21,11 @@ const RecipeItem = ({ data }) => {
                 {data.map(item => {
                     return(
                     <div className="recipes-container" key={item.idMeal}>
+                      
                         <img className="recipe-image"
                             src={item.strMealThumb}
                             alt={item.strMeal}
                             onClick={()=> handleClick(item.idMeal) }
-
                         />
                         <h3 className="recipe-name"> {item.strMeal}</h3>
 
