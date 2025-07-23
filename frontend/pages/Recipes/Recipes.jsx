@@ -9,10 +9,9 @@ import '../../src/css/Recipes.css'
 const Recipes = () => {
 
     const [item, setItem] = useState([]);
-    const [isRecipe, setisRecipe] = useState(true)
     const inputRef = useRef()
 
-    const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=a`
+    const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=f`
 
     useEffect(() => {
 
@@ -20,15 +19,10 @@ const Recipes = () => {
             try {
                 const response = await fetch(url)
                 const data = await response.json();
-                //console.log(data.meals)
                 setItem(data.meals)
-
-
             } catch (e) {
                 console.log(e)
-
             }
-
         }
         DisplayRecipes()
 
@@ -42,11 +36,20 @@ const Recipes = () => {
         try {
             const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${recipe}`)
             const data = await response.json();
-            setItem(data.meals)
+
+            if (data.meals) {
+                setItem(data.meals)
+
+            } else {
+                setItem([])
+
+            }
+
             recipe = "";
         } catch (e) {
             console.log(e);
-            setisRecipe(false)
+            setItem([])
+
         }
         recipe = inputRef.current.value = "";
     }
@@ -68,7 +71,7 @@ const Recipes = () => {
                 <button type="submit" className="add"><FaSearch /></button>
             </form>
             <div>
-                {isRecipe ? (<RecipeItem
+                {item && item.length > 0 ? (<RecipeItem
                     data={item} />) : (<p style={{ textAlign: 'center' }}>'No recipes found'</p>
                 )}
 
