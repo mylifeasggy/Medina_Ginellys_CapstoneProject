@@ -30,7 +30,7 @@ const Form = () => {
     async function fetchForm() {
 
         try {
-            const response = await fetch(url + '/form')
+            const response = await fetch(`${url}/form`)
             const data = await response.json();
             setRecipes(data)
 
@@ -68,7 +68,7 @@ const Form = () => {
                     headers: { 'Content-Type': 'application/json' },
                 });
             } else {
-                    response = await fetch(url + '/form', {
+                    response = await fetch(`${url}/form`, {
                     method: 'POST',
                     body: JSON.stringify(recipe),
                     headers: {
@@ -107,9 +107,30 @@ const Form = () => {
         setId(id)
         setUpdateForm(true)
         setForm(formData)
-
-
     }
+
+
+     async function handleDelete(id) {
+
+        console.log("deleterecipebyId", id);
+
+        try { 
+
+         const response= await fetch(`${import.meta.env.VITE_BASE_URL}/form/${id}`, {
+            method: 'DELETE'
+        });
+          if (response.ok) {
+
+          setRecipes(prev => prev.filter(item => item._id !== id))
+
+         setForm(initialForm);
+       
+          }
+        } catch(e) {
+         console.log(e) 
+        }
+       
+    } 
 
 
     return (
@@ -184,10 +205,7 @@ const Form = () => {
 
                         <FormCard
                             recipe={recipe}
-                            onDelete={(id) => {
-                                setRecipes(prev => prev.filter(item => item._id !== id));
-                            }}
-
+                            handleDelete={handleDelete}
                             handleUpdate={handleUpdate}
                         />
 

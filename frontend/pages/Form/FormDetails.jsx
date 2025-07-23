@@ -27,7 +27,7 @@ const FormDetails = () => {
     }, [id])
 
     if (!formDetails) {
-        return <p>Loading...</p>;
+        return;
     }
 
 
@@ -40,7 +40,7 @@ const FormDetails = () => {
              <p className="details-time">Servings: {formDetails.servings} people</p>
             <h4 className="details-title" >Ingredients:</h4>
             <ul className="details-list ">
-                {formDetails
+                {formDetails 
                     .ingredients.map((ingredient, i) => (
                         <li key={i}>{ingredient}</li>
                     ))}

@@ -5,8 +5,6 @@ import formRoute from "./routes/formRoute.js"
 
 
 
-// import Ingredients from "./models/IngredientsModel.js"
-
 import connectDb from "./db.js";
 
 const app = express()

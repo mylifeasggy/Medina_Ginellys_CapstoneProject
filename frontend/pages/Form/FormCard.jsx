@@ -4,20 +4,7 @@ import { Link } from "react-router-dom";
 
 
 
-const FormCard = ({ recipe, onDelete, handleUpdate}) => {
-
-
-    async function handleDelete(id) {
-
-        console.log("deleterecipebyId", id);
-        const response= await fetch(`${import.meta.env.VITE_BASE_URL}/form/${recipe._id}`, {
-            method: 'DELETE'
-        });
-
-          if (response.ok) {
-        onDelete(id);
-          }
-    }
+const FormCard = ({ recipe, handleDelete, handleUpdate}) => {
 
 
 
