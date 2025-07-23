@@ -1,4 +1,4 @@
-import { useState, useRef} from "react";
+import { useState, useRef } from "react";
 import IngredientsList from "./IngredientsList";
 import RecipeContainer from "./RecipeContainer"
 import '../../src/css/MainPage.css'
@@ -27,18 +27,21 @@ const SearchBar = () => {
     function deleteIngredient(indexDelete) {
         setIngredients((prev) =>
             prev.filter((_, index) => index !== indexDelete));
-
+       
     }
 
-     async function getRecipe() {
-    
-    try {
-        const recipeMarkdown = await getRecipeFromAPI(ingredient)
-        setRecipe(recipeMarkdown)
-    }catch(e) {
+    async function getRecipe() {
+       
+        try {
+            const recipeMarkdown = await getRecipeFromAPI(ingredient)
+            setRecipe(recipeMarkdown)
 
-        console.log(e)
-    }
+
+
+        } catch (e) {
+
+            console.log(e)
+        }
     }
 
 
@@ -51,7 +54,7 @@ const SearchBar = () => {
 
     return (
         <div className="main-container">
-            
+
             <form className="search-ingredient" onSubmit={submitIngredient}>
                 <input type="text" ref={inputRef}
                     id="search-bar"
