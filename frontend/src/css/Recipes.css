@@ -4,7 +4,8 @@
  
   margin: 0 auto;    
   padding: 0 10px;
-  width: 700px;    
+  width: 100%;
+  max-width: 700px;    
 }
 
 
@@ -15,12 +16,12 @@
 
 .recipe-grid {
     display: grid;
-
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 20px 8px;
     margin-top: 50px;
     margin-left: auto;
     margin-right: auto;
+    padding: 0 10px;
 
 }
 
@@ -139,4 +140,14 @@ text-align: center;
 }
 .link-container {
     text-decoration: none;
+}
+
+@media (min-width: 600px) {
+  .details-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .recipes-test {
+    padding: 0 20px;
+  }
 }
