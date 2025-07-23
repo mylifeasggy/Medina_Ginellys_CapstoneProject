@@ -33,7 +33,7 @@ const RecipeDetails = () => {
 
 
     if (!details) {
-        return <p>Loading recipe...</p>;
+        return;
     }
 
     //For loop to get the list of ingredients. 
