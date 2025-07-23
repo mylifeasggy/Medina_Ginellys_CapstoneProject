@@ -10,7 +10,7 @@ import formRoute from "./routes/formRoute.js"
 import connectDb from "./db.js";
 
 const app = express()
-const port = process.env.PORT || 3000
+const port = process.env.PORT 
 
 app.use(express.json());
 app.use(cors())
@@ -22,6 +22,6 @@ app.use('/form', formRoute )
 //Recipes route 
 
 app.listen(port, () => {
-    console.log(`Server listening on port:http://localhost:${port}/form`)
+    console.log(`Server listening on port:http://localhost:${port}`)
     connectDb()
 });
