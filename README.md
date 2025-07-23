@@ -25,11 +25,28 @@ Backend: https://imchef-backend.onrender.com/form
 - **Custom CSS**
 - **React Icons**
 - **RESTful API Integration**
+- **Express**
+-**NodeJs**
+-**MongoDB**
 
 ---
+
+## Backend Routes
+| Endpoits      | Method        |Description    | 
+| ------------- | ------------- | ------------- |
+| /form         | GET           | All the recipes created by the user| 
+| /form         | POST          | Create a new recipe |
+| /form/:id     | GET           | Details about one recipe in specific | 
+| /form/:id     | PUT           |Update information about a recipe | 
+| /form/:id     | DELETE        |Delete a recipe| 
 
 ## 🧪 Future Improvements
 📝 User authentication & saved recipes
 📷 Upload photos per recipe
 
 https://trello.com/b/PPIkmNqJ
+
+![Form Page](FormPage.png)
+![Main Page](MainPage.png)
+![Recipes Page](RecipesPage.png)
+![Recipe page](image.png)
