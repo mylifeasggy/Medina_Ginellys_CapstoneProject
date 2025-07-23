@@ -1,5 +1,12 @@
 /* RECIPE */
 
+.recipes-test {
+ 
+  margin: 0 auto;     /* centers horizontally */
+  padding: 0 10px;
+  width: 700px;    /* optional horizontal padding */
+}
+
 .recipe-container {
 
     background: #fff9f5;
@@ -7,8 +14,8 @@
     border-radius: 12px;
     padding: 20px;
     margin: 20px auto;
-    max-width: 700px;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+   
 
 }
 
@@ -42,12 +49,13 @@
 
 .recipe-grid {
     display: grid;
-     grid-template-columns: repeat(2, 1fr);
+
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 20px;
-    padding: 20px;
-    justify-items: center;
+    gap: 20px 8px;
     margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+
 }
 
 

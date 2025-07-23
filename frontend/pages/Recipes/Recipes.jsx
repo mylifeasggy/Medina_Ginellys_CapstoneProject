@@ -8,7 +8,7 @@ import '../../src/css/Recipes.css'
 
 const Recipes = () => {
 
-    const [item, setItem] = useState(null);
+    const [item, setItem] = useState([]);
     const inputRef = useRef()
 
     const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=f`
@@ -19,7 +19,11 @@ const Recipes = () => {
             try {
                 const response = await fetch(url)
                 const data = await response.json();
-                setItem(data.meals)
+                if (data.meals) {
+                    setItem(data.meals);
+                } else {
+                    setItem([]);
+                }
             } catch (e) {
                 console.log(e)
             }
@@ -27,6 +31,8 @@ const Recipes = () => {
         DisplayRecipes()
 
     }, [url])
+
+
 
     async function handleRecipe(e) {
         e.preventDefault();
@@ -60,14 +66,14 @@ const Recipes = () => {
                 />
                 <button type="submit" className="add"><FaSearch /></button>
             </form>
-            <div>
-                {item && item.length > 0 && (
+            <div className='recipes-test'>
+                {item && (
                     <RecipeItem data={item} />
 
                 )}
 
-                {item && item.length === 0 && (
-              <p style={{ textAlign: 'center' }}>'No recipes found'</p>
+                {!item &&  (
+                    <p style={{ textAlign: 'center' }}>'No recipes found'</p>
 
 
                 )}
