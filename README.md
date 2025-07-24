@@ -46,7 +46,7 @@ Backend: https://imchef-backend.onrender.com/form
 
 https://trello.com/b/PPIkmNqJ
 
-![Form Page](FormPage.png)
 ![Main Page](MainPage.png)
+![Form Page](FormPage.png)
 ![Recipes Page](RecipesPage.png)
 ![Recipe page](image.png)
