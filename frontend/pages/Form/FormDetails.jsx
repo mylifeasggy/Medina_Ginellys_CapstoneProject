@@ -40,7 +40,7 @@ const FormDetails = () => {
         <div className="recipe-details">
             <h2 className="details-title">{formDetails.title}</h2>
             <p className="details-time">CookTime: {formDetails.cook_time} minutes</p>
-             <p className="details-time">Servings: {formDetails.servings} people</p>
+             <p className="details-time">Servings: {formDetails.servings} servings</p>
             <h4 className="details-title" >Ingredients:</h4>
             <ul className="details-list ">
                 {formDetails 
