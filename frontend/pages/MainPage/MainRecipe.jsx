@@ -25,7 +25,12 @@ const SearchBar = () => {
 
     function deleteIngredient(indexDelete) {
         setIngredients((prev) =>
-            prev.filter((_, index) => index !== indexDelete));
+            {  const d = prev.filter((_, index) => index !== indexDelete)
+                //console.log(d)
+                return d;
+               
+            });
+             setRecipe("")
        
     }
     // Click on btn getRecipe to get the custom recipe with markdowns
