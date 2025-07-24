@@ -8,6 +8,10 @@ const FormDetails = () => {
     const { id } = useParams();
     const url = import.meta.env.VITE_BASE_URL
 
+
+    // If user click on viewdetails one form card in specific, get that recipeform by Id and show me the content in another page. 
+
+    // Fetching the data by Id
     useEffect(() => {
 
         async function DisplayForm() {
@@ -20,7 +24,6 @@ const FormDetails = () => {
                 console.log(e)
 
             }
-
         }
         DisplayForm()
 

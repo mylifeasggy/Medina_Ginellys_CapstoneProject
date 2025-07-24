@@ -19,30 +19,30 @@ const Form = () => {
 
     const [form, setForm] = useState(initialForm)
     const [recipe, setRecipes] = useState(null)
-    const [id, setId]= useState(null)
+    const [id, setId] = useState(null)
     const [updateForm, setUpdateForm] = useState(false)
 
 
-    function handleChange(e) {
-        setForm({ ...form, [e.target.name]: e.target.value })
-    }
-
     async function fetchForm() {
-
         try {
             const response = await fetch(`${url}/form`)
             const data = await response.json();
             setRecipes(data)
-
         } catch (e) {
             console.log(e)
         }
     }
-
     useEffect(() => {
         fetchForm()
     }, [])
 
+    
+    function handleChange(e) {
+        setForm({ ...form, [e.target.name]: e.target.value })
+    }
+
+    // If user I have an Id(true) alredy set update form to true so user can  edit. 
+    // If I don't have an Id, its a new form. 
     async function handleSubmit(e) {
         e.preventDefault()
 
@@ -58,17 +58,17 @@ const Form = () => {
         }
 
         try {
-            let response; 
+            let response;
 
             if (updateForm && id) {
 
-                    response = await fetch(`${url}/form/${id}`, {
+                response = await fetch(`${url}/form/${id}`, {
                     method: 'PUT',
                     body: JSON.stringify(recipe),
                     headers: { 'Content-Type': 'application/json' },
                 });
             } else {
-                    response = await fetch(`${url}/form`, {
+                response = await fetch(`${url}/form`, {
                     method: 'POST',
                     body: JSON.stringify(recipe),
                     headers: {
@@ -87,7 +87,7 @@ const Form = () => {
         }
     }
 
-
+// Update of the form if user click edit 
     async function handleUpdate(e, id) {
 
         let response = await fetch(`${url}/form/${id}`)
@@ -110,112 +110,120 @@ const Form = () => {
     }
 
 
-     async function handleDelete(id) {
+    async function handleDelete(id) {
 
         console.log("deleterecipebyId", id);
 
-        try { 
+        try {
+            const response = await fetch(`${import.meta.env.VITE_BASE_URL}/form/${id}`, {
+                method: 'DELETE'
+            });
 
-         const response= await fetch(`${import.meta.env.VITE_BASE_URL}/form/${id}`, {
-            method: 'DELETE'
-        });
-          if (response.ok) {
-
-          setRecipes(prev => prev.filter(item => item._id !== id))
-
-         setForm(initialForm);
-       
-          }
-        } catch(e) {
-         console.log(e) 
+            // If I delete the recipe, set the form to empty.
+            if (response.ok) {
+                setRecipes(prev => prev.filter(item => item._id !== id))
+                setForm(initialForm);
+            }
+        } catch (e) {
+            console.log(e)
         }
-       
-    } 
+    }
 
 
     return (
-        <div className='create-recipe'>
-            <h2> CREATE YOUR RECIPE</h2>
-            <form onSubmit={handleSubmit}>
-                <label>RECIPE TITLE</label>
-                <input
-                    type="text"
-                    name='title'
-                    required
-                    value={form.title}
-                    onChange={handleChange}
-                />
-                <label>AUTHOR</label>
-                <input
-                    type='text'
-                    name="author"
-                    value={form.author}
-                    onChange={handleChange}
-                    required
-                />
-                <label>COOK TIME</label>
-                <input
-                    type='number'
-                    name='cook_time'
-                    value={form.cook_time}
-                    onChange={handleChange}
-                    required
-                />
-                <label>SERVINGS</label>
-                <input
-                    type='number'
-                    name='servings'
-                    value={form.servings}
-                    onChange={handleChange}
-                />
-                <label>INGREDIENTS</label>
-                <textarea
-                    type="text"
-                    name="ingredients"
-                    row='5'
-                    value={form.ingredients}
-                    placeholder="separated by comma"
-                    onChange={handleChange}
-                    required
-                >
-                </textarea>
-                <label>INSTRUCTIONS</label>
-                <textarea
-                    name='directions'
-                    row="5"
-                    value={form.directions}
-                    onChange={handleChange}
-                >
-                </textarea>
-                <label>NOTES</label>
-                <textarea
-                    type='text'
-                    name="notes"
-                    value={form.notes}
-                    onChange={handleChange}
-                >
-                </textarea>
-                <button type="submit"> 
-                    {updateForm ? "Update Recipe" : "Submit Recipe"}</button>
-            </form>
 
-            <div className="grid-form">
-                {recipe && recipe.map((recipe) => (
-                    <div key={recipe._id} className="form-container">
+        // creation of the form
+        <>
 
-                        <FormCard
-                            recipe={recipe}
-                            handleDelete={handleDelete}
-                            handleUpdate={handleUpdate}
-                        />
+            <div className='create-recipe'>
+                <h2> CREATE YOUR RECIPE</h2>
+                <form onSubmit={handleSubmit}>
+                    <label>RECIPE TITLE</label>
+                    <input
+                        type="text"
+                        name='title'
+                        required
+                        value={form.title}
+                        onChange={handleChange}
+                    />
+                    <label>AUTHOR</label>
+                    <input
+                        type='text'
+                        name="author"
+                        value={form.author}
+                        onChange={handleChange}
+                        required
+                    />
+                    <label>COOK TIME</label>
+                    <input
+                        type='number'
+                        name='cook_time'
+                        value={form.cook_time}
+                        onChange={handleChange}
+                        required
+                    />
+                    <label>SERVINGS</label>
+                    <input
+                        type='number'
+                        name='servings'
+                        value={form.servings}
+                        onChange={handleChange}
+                    />
+                    <label>INGREDIENTS</label>
+                    <textarea
+                        type="text"
+                        name="ingredients"
+                        row='5'
+                        value={form.ingredients}
+                        placeholder="Separated by comma..."
+                        onChange={handleChange}
+                        required
+                    >
+                    </textarea>
+                    <label>INSTRUCTIONS</label>
+                    <textarea
+                        name='directions'
+                        row="5"
+                        value={form.directions}
+                        onChange={handleChange}
+                    >
+                    </textarea>
+                    <label>NOTES</label>
+                    <textarea
+                        type='text'
+                        name="notes"
+                        value={form.notes}
+                        onChange={handleChange}
+                    >
+                    </textarea>
 
-                    </div>
+                    {/* submit button but when it's edit toggle to update */}
+                    <button type="submit">
+                        {updateForm ? "Update Recipe" : "Submit Recipe"}</button>
+                </form>
 
-                ))}
+                {/* if the user post a recipe then create a card with the details of the recipe with button for delete and update */}
+                <div className="grid-form">
+                    {recipe && recipe.map((recipe) => (
+                        <div key={recipe._id} className="form-container">
+
+                            <FormCard
+                                recipe={recipe}
+                                handleDelete={handleDelete}
+                                handleUpdate={handleUpdate}
+                            />
+
+                        </div>
+
+                    ))}
+                </div>
+
             </div>
 
-        </div>
+        </>
     );
+
+
 }
 
 

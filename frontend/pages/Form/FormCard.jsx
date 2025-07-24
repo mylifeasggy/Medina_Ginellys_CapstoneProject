@@ -7,7 +7,8 @@ import { Link } from "react-router-dom";
 const FormCard = ({ recipe, handleDelete, handleUpdate}) => {
 
 
-
+// Form card with a image, edit button, view detail button and delete button. 
+// Passed the function as a props and details of the recipe(form)
     return (
         <div className='form-card'>
             <img src='/images/recipe.png' alt="recipe" />
