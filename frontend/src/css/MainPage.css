@@ -1,5 +1,8 @@
 /* MAIN PAGE */
-
+.main-title {
+  text-align: center;
+  color: #e07b00;
+}
 .main-container {
     padding: 10px 30px;
     display: flex;
@@ -10,7 +13,7 @@
 }
 
 .search-ingredient {
-    margin-top: 100px;
+    margin-top: 25px;
     gap: 10px;
     display: flex;
     justify-content: center;

@@ -6,6 +6,8 @@ import { useParams } from "react-router-dom";
 
 const RecipeDetails = () => {
 
+    // Getting the information by ID, when user click the card of the recipe he wants to see.
+
     const [details, setDetails] = useState(null)
 
     const { id } = useParams();
@@ -36,7 +38,7 @@ const RecipeDetails = () => {
         return;
     }
 
-    //For loop to get the list of ingredients. 
+    //For loop to get the list of ingredients because its a object
     const ingredients = []
 
     for (let i = 1; i <= 20; i++) {
@@ -51,7 +53,9 @@ const RecipeDetails = () => {
 
 
 
-    return (
+    return ( 
+
+        // The details of the recipe, name, ingrediets etc
         <>
 
             <div className="recipe-details">

@@ -10,7 +10,7 @@ const Recipes = () => {
 
     const [item, setItem] = useState([]);
     const inputRef = useRef()
-
+// This is displaying random recipes in the page with letter f, just to the page look good an less empty. 
     const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=f`
 
     useEffect(() => {
@@ -34,7 +34,7 @@ const Recipes = () => {
 
 
 
-
+// After 
 
 
     async function handleRecipe(e) {
@@ -55,7 +55,7 @@ const Recipes = () => {
 
 
 
-
+//User input the name of the recipe he wants to see. and if there's not a recipe it's supossed to show No recipes found.
 
 
 

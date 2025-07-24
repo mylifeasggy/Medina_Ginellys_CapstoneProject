@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 const RecipeItem = ({ data }) => {
 
     //Rendering each image of the recipe with name so user can click on it and display the details of the recipe.
-    //Missing: When click image, render the ingredients and instruction.
 
     return (
         <>
